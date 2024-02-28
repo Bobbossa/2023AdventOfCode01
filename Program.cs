@@ -15,9 +15,8 @@ namespace _2023AdventOfCode01 {
             using (var sr = new StreamReader("C:\\VirtualStudioProjects\\2023AdventOfCode01\\2023AOC01Input.txt"))
             testString = sr.ReadLine();
             if (CheckTextLineForNumbers(testString)) {
-                //Console.WriteLine(testString);
                 testString = StripLettersFromString(testString);
-                //Console.WriteLine(testString);
+                testString = StripMiddleCharactersFromString(testString);
                 processedInts.Add(ConvertStringToNumber(testString));
                 foreach (int i in processedInts) {
                     finalTotal += i;
@@ -26,23 +25,6 @@ namespace _2023AdventOfCode01 {
             }
 
             Console.WriteLine("End of Test");
-
-
-            /*
-            try {
-                
-                
-                // Open the text file using a stream reader.
-                using (var sr = new StreamReader("C:\\VirtualStudioProjects\\2023AdventOfCode01\\2023AOC01Input.txt")) {
-                    // Read the stream as a string, and write the string to the console.
-                    Console.WriteLine(sr.ReadLine());
-                    Console.WriteLine(sr.ReadLine());
-                }
-            }
-            catch (IOException e) {
-                Console.WriteLine("The file could not be read:");
-                Console.WriteLine(e.Message);
-            }*/
         }
 
         static bool CheckTextLineForNumbers(string input) {
@@ -57,23 +39,24 @@ namespace _2023AdventOfCode01 {
         static string StripLettersFromString(string input) {
             string output = "";
             for (int x = 0; x < input.Length; x++) {
-                //Console.WriteLine(input[x]);
                 for (int y = 0; y < regularDigits.Length; y++) {
                     if (input[x] == regularDigits[y]) {
-                        //output.Append<char>(input[x]);
                         output += input[x];
-                        //Console.WriteLine(output);
                     }
                 }
             }
-            //Console.WriteLine(output);
             return output;
         }
 
         static string StripMiddleCharactersFromString(string input) {
             string output = "";
-            
-            
+            output += input[0];
+            if(input.Length > 1) {
+                output += input[input.Length - 1];
+            }
+            else {
+                output += output;
+            }            
             return output;
         }
 
