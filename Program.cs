@@ -10,9 +10,9 @@ namespace _2023AdventOfCode01 {
         static void Main() {
             Console.ForegroundColor = ConsoleColor.Green;
             string stringToProcess = "processing file...";
-            using (var sr = new StreamReader("C:\\VirtualStudioProjects\\2023AdventOfCode01\\2023AOC01Input.txt"))
-            
-            while (stringToProcess != null) {                
+            using (var sr = new StreamReader("2023AOC01Input.txt"))
+
+                while (stringToProcess != null) {                
                 Console.WriteLine(stringToProcess);
                 if (CheckTextLineForNumbers(stringToProcess)) {
                     stringToProcess = StripLettersFromString(stringToProcess);
@@ -32,7 +32,7 @@ namespace _2023AdventOfCode01 {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("...processing complete.");
         }
-
+        
         //Checks to see if there are any numbers in the string.
         static bool CheckTextLineForNumbers(string input) {
             foreach (char digit in regularDigits) {
@@ -42,7 +42,7 @@ namespace _2023AdventOfCode01 {
             }
             return false;
         }
-
+        
         //Removes all characters from a string that are not containted within 'regularDigits[]'.
         static string StripLettersFromString(string input) {
             string output = "";
@@ -72,6 +72,6 @@ namespace _2023AdventOfCode01 {
         static int ConvertStringToInt(string input) {
             int output = int.Parse(input);
             return output;
-        }        
+        }
     }
 }
