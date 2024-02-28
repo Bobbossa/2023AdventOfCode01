@@ -29,6 +29,7 @@ namespace _2023AdventOfCode01 {
             }
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Total = " + finalTotal);
+            ReadPartialString("pleasework", 10, 4);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("...processing complete.");
         }
@@ -72,6 +73,21 @@ namespace _2023AdventOfCode01 {
         static int ConvertStringToInt(string input) {
             int output = int.Parse(input);
             return output;
+        }
+
+        static string ReadPartialString(string wholeString, int startIndex, int selectionSize = 1) {
+            string partialString = "";
+            int loopCount = 0;
+            //Reduces selectionSize if it would exceed the dimensions of the array.
+            if (wholeString.Length < startIndex + 1 + selectionSize) {
+                selectionSize = wholeString.Length - startIndex;
+            }
+            while (loopCount < selectionSize) {
+                partialString += wholeString[startIndex + loopCount];
+                loopCount++;
+                Console.WriteLine(partialString);
+            }
+            return partialString;
         }
     }
 }
