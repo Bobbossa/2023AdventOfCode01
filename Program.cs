@@ -1,32 +1,39 @@
-﻿using System;
-using System.Linq;
-using System.Reflection.Metadata;
-
+﻿
 namespace _2023AdventOfCode01 {
 
     internal class Program {
-        //static char[] regularDigits = ["0","1","2","3","4","5","6","7","8","9"];
+        //static string[] regularDigits = ["0","1","2","3","4","5","6","7","8","9"];
         static char[] regularDigits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
         static List<int> processedInts = new List<int>();
         static int finalTotal = 0;
 
         static void Main() {
-            string testString;
+            Console.ForegroundColor = ConsoleColor.Green;
+            string stringToProcess = "processing file...";
             using (var sr = new StreamReader("C:\\VirtualStudioProjects\\2023AdventOfCode01\\2023AOC01Input.txt"))
-            testString = sr.ReadLine();
-            if (CheckTextLineForNumbers(testString)) {
-                testString = StripLettersFromString(testString);
-                testString = StripMiddleCharactersFromString(testString);
-                processedInts.Add(ConvertStringToNumber(testString));
-                foreach (int i in processedInts) {
-                    finalTotal += i;
+            
+            while (stringToProcess != null) {                
+                Console.WriteLine(stringToProcess);
+                if (CheckTextLineForNumbers(stringToProcess)) {
+                    stringToProcess = StripLettersFromString(stringToProcess);
+                    stringToProcess = StripMiddleCharactersFromString(stringToProcess);
+                    processedInts.Add(ConvertStringToInt(stringToProcess));                    
                 }
-                Console.WriteLine(finalTotal);
+                //Goes to the next line in the file.
+                stringToProcess = sr.ReadLine();
             }
 
-            Console.WriteLine("End of Test");
+            //Sums all the aquired values.
+            foreach (int i in processedInts) {
+                finalTotal += i;
+            }
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Total = " + finalTotal);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("...processing complete.");
         }
 
+        //Checks to see if there are any numbers in the string.
         static bool CheckTextLineForNumbers(string input) {
             foreach (char digit in regularDigits) {
                 if (input.Contains(digit)) {
@@ -36,6 +43,7 @@ namespace _2023AdventOfCode01 {
             return false;
         }
 
+        //Removes all characters from a string that are not containted within 'regularDigits[]'.
         static string StripLettersFromString(string input) {
             string output = "";
             for (int x = 0; x < input.Length; x++) {
@@ -48,6 +56,7 @@ namespace _2023AdventOfCode01 {
             return output;
         }
 
+        //Removes all characters from a string that are not the first character or the last character. Always returns a 2 character string. So input 7 would be returned as 77.
         static string StripMiddleCharactersFromString(string input) {
             string output = "";
             output += input[0];
@@ -60,12 +69,9 @@ namespace _2023AdventOfCode01 {
             return output;
         }
 
-        static int ConvertStringToNumber(string input) {
-            int output;
-            output = int.Parse(input);
+        static int ConvertStringToInt(string input) {
+            int output = int.Parse(input);
             return output;
-        }
-
-        
+        }        
     }
 }
